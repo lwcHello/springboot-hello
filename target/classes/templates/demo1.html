@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <p th:text="${hello}"></p><br>
+  <p>[[${hello}]]</p><br>
+
+
+  <form id="login-form" th:action="@{/demo1}" method="post">
+         <button>提交</button>
+  </form>
+
+ <table border="1">
+  <tr>
+      <td>序号</td>
+      <td>用户名</td>
+      <td>密码</td>
+      <td>姓名</td>
+  </tr>
+     <tr th:each="user,userStat:${users}">
+         <td th:text="${userStat.count}"></td>
+         <td th:text="${user.username}"></td>
+         <td th:text="${user.password}"></td>
+         <td th:text="${user.name}"></td>
+     </tr>
+ </table>
+
+ <div th:each="entry:${dataMap}">
+     <span th:text="${entry.key}"></span>
+     <span th:text="${entry.value}"></span>
+
+ </div>
+
+  <div th:each="nm,nmStat:${names}">
+      <span th:text="${nmStat.count}"></span><span th:text="${nm}"></span><br>
+      ==============================================
+  </div>
+
+  <div>
+      <span th:text="${#dates.format(now,'yyyy-MM-dd HH:mm:ss')}"></span>
+  </div>
+
+  <!--
+  if:th：unless表示条件不成立 ，输出数据
+  -->
+  <div>
+      <span th:if="${(age>=18)}">终于长大了！</span>
+      <span th:unless="${age<18}">成年人</span>
+  </div>
+
+  <div th:include="footer::copy"></div>
+</body>
+</html>
